@@ -2,21 +2,22 @@ package br.com.banco;
 
 import java.math.BigDecimal;
 
-public class Conta {
+public abstract class Conta {
 
-	private Long numeroConta;
 	private BigDecimal saldo;
+	private int numeroConta;
 	private Agencia agencia;
 
-	public Conta(Long numeroConta, BigDecimal saldo, Agencia agencia) {
-		if (numeroConta > 0 && saldo.compareTo(BigDecimal.ZERO) > 0 && agencia != null) {
+	public Conta(int numeroConta, BigDecimal saldo, Agencia agencia) {
+		if (numeroConta > 0 && saldo.compareTo(BigDecimal.ZERO) > 0 &&
+				agencia != null) {
 			this.numeroConta = numeroConta;
 			this.saldo = saldo;
 			this.agencia = agencia;
 		}
 	}
 
-	public Long getNumeroConta() {
+	public int getNumeroConta() {
 		return numeroConta;
 	}
 
@@ -28,11 +29,13 @@ public class Conta {
 		return agencia;
 	}
 
-	public void sacar(BigDecimal valor) {
+	public BigDecimal sacar(BigDecimal valor) {
 
-		if (this.saldo.compareTo(BigDecimal.ZERO) > 0 && valor.compareTo(BigDecimal.ZERO) > 0) {
+		if (this.saldo.compareTo(BigDecimal.ZERO) > 0 &&
+				valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.subtract(valor);
 		}
+		return valor;
 	}
 
 	public void depositar(BigDecimal valor) {
@@ -40,5 +43,18 @@ public class Conta {
 		if (valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.add(valor);
 		}
+	}
+
+	public void transferir(BigDecimal valor, Conta contaTransferir) {
+		contaTransferir.depositar(this.sacar(valor));
+	}
+
+	@Override
+	public String toString() {
+		return "Conta{" +
+				"saldo=" + saldo +
+				", numero conta=" + numeroConta +
+				", agencia=" + agencia.toString() +
+				'}';
 	}
 }
