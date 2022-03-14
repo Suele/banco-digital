@@ -1,6 +1,7 @@
 package br.com.banco;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 public class ClienteBanco {
 	public static void main(String[] args) {
@@ -25,10 +26,49 @@ public class ClienteBanco {
 
 		ContaPoupanca contaPoupanca = new ContaPoupanca(22222, new BigDecimal(10), agencia);
 
-		contaCorrente.transferir(BigDecimal.valueOf(100), contaPoupanca);
 
-		System.out.println("\n >>> cliente: " + cliente + "\n");
-		System.out.println(">>> conta corrente: " + contaCorrente + "\n");
-		System.out.println(">>> conta poupança: " + contaPoupanca);
+		Scanner dadosDeEntrada = new Scanner(System.in);
+
+		int finaliza = -1;
+
+		while (finaliza != 0) {
+
+			System.out.println("==========================================");
+			System.out.println("============Escolha uma opção==============");
+			System.out.println("1 - Verificar o Saldo");
+			System.out.println("2 - Depositar");
+			System.out.println("3 - Transferir");
+			System.out.println("4 - Finalizar acesso a conta");
+
+			int opcao = dadosDeEntrada.nextInt();
+			BigDecimal valor;
+
+			switch (opcao) {
+				case 1:
+					System.out.println(">>> Saldo disponível para Saque R$ " + contaCorrente.getSaldo());
+					break;
+				case 2:
+					System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
+					System.out.print("Valor do Deposito: ");
+					valor = dadosDeEntrada.nextBigDecimal();
+					contaCorrente.depositar(valor);
+					System.out.println(">>> Novo Saldo R$ " + contaCorrente.getSaldo());
+					break;
+				case 3:
+					System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
+					System.out.print("Valor do Deposito: ");
+					valor = dadosDeEntrada.nextBigDecimal();
+					contaCorrente.transferir(BigDecimal.valueOf(100), contaPoupanca);
+					System.out.println(">>> Novo Atual R$ " + contaCorrente.getSaldo());
+					break;
+				case 4:
+					finaliza = 0;
+					System.out.println("Acesso ao Banco Encerrado.....");
+					System.exit(0);
+					break;
+			}
+
+			dadosDeEntrada.reset();
+		}
 	}
 }
