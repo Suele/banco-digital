@@ -17,6 +17,12 @@ public abstract class Conta {
 		}
 	}
 
+	public Conta(int numeroConta, Agencia agencia) {
+		this.numeroConta = numeroConta;
+		this.agencia = agencia;
+		this.saldo = new BigDecimal(100);
+	}
+
 	public int getNumeroConta() {
 		return numeroConta;
 	}
@@ -39,10 +45,19 @@ public abstract class Conta {
 	}
 
 	public void depositar(BigDecimal valor) {
+		BigDecimal saldoAntesDeposito = this.saldo;
+		BigDecimal saldoDepoisDeposito = new BigDecimal(0);
 
 		if (valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.add(valor);
+			saldoDepoisDeposito = this.saldo;
 		}
+		if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
+			System.out.println("Deposito realizado com sucesso.");
+		} else {
+			System.out.println("Deposito não foi realizado.");
+		}
+		System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
 	}
 
 	public void transferir(BigDecimal valor, Conta contaTransferir) {

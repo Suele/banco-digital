@@ -33,8 +33,8 @@ public class ClienteBanco {
 
 		while (finaliza != 0) {
 
-			System.out.println("==========================================");
-			System.out.println("============Escolha uma opção==============");
+			System.out.println("\n==========================================");
+			System.out.println("============ Menu Principal ==================");
 			System.out.println("1 - Verificar o Saldo");
 			System.out.println("2 - Depositar");
 			System.out.println("3 - Transferir");
@@ -48,12 +48,43 @@ public class ClienteBanco {
 					System.out.println(">>> Saldo disponível para Saque R$ " + contaCorrente.getSaldo());
 					break;
 				case 2:
-					System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
-					System.out.print("Valor do Deposito: ");
-					valor = dadosDeEntrada.nextBigDecimal();
-					contaCorrente.depositar(valor);
-					System.out.println(">>> Novo Saldo R$ " + contaCorrente.getSaldo());
+					System.out.println("\n");
+					System.out.println("=======================================================");
+					System.out.println("============ Escolha uma das opções abaixo ================");
+					System.out.println("5 - Depositar na sua conta?");
+					System.out.println("6 - Depositar em outra conta?");
+					System.out.println("7 - Finalizar acesso a conta \n");
+
+					int opcaoDeposito = dadosDeEntrada.nextInt();
+
+					switch (opcaoDeposito) {
+						case 5:
+							System.out.println("5 - Depositar na sua conta");
+							System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
+							System.out.print("Valor do Deposito: ");
+							valor = dadosDeEntrada.nextBigDecimal();
+							contaCorrente.depositar(valor);
+							System.out.println(">>>Seu Novo Saldo R$ " + contaCorrente.getSaldo());
+							break;
+						case 6:
+							System.out.println("6 - Deposito em outra conta");
+							System.out.print("Digite o número da conta: ");
+							int numeroConta = dadosDeEntrada.nextInt();
+
+							ContaCorrente outraConta = new ContaCorrente(numeroConta, agencia);
+							System.out.print("Digite o valor do Deposito: ");
+							valor = dadosDeEntrada.nextBigDecimal();
+							outraConta.depositar(valor);
+							break;
+						case 7:
+							System.out.println("7 - Finalizar o acesso.");
+							finaliza = 0;
+							System.out.println("Acesso ao Banco Encerrado.....");
+							System.exit(0);
+							break;
+					}
 					break;
+
 				case 3:
 					System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
 					System.out.print("Valor do Deposito: ");
@@ -61,13 +92,13 @@ public class ClienteBanco {
 					contaCorrente.transferir(BigDecimal.valueOf(100), contaPoupanca);
 					System.out.println(">>> Novo Atual R$ " + contaCorrente.getSaldo());
 					break;
+
 				case 4:
 					finaliza = 0;
 					System.out.println("Acesso ao Banco Encerrado.....");
 					System.exit(0);
 					break;
 			}
-
 			dadosDeEntrada.reset();
 		}
 	}
