@@ -86,11 +86,25 @@ public class ClienteBanco {
 					break;
 
 				case 3:
-					System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
-					System.out.print("Valor do Deposito: ");
-					valor = dadosDeEntrada.nextBigDecimal();
-					contaCorrente.transferir(BigDecimal.valueOf(100), contaPoupanca);
-					System.out.println(">>> Novo Atual R$ " + contaCorrente.getSaldo());
+					System.out.println("========== Transferencia =================");
+					System.out.println("1 - Para o mesmo banco");
+					System.out.println("2 - Para outro banco \n");
+
+					int opcaoTransferencia = dadosDeEntrada.nextInt();
+
+					switch (opcaoTransferencia) {
+						case 1:
+							System.out.println("Transferencia para o mesmo banco");
+							System.out.println(">>> Saldo Atual R$ " + contaCorrente.getSaldo());
+							System.out.print("Valor do Deposito: ");
+							valor = dadosDeEntrada.nextBigDecimal();
+							contaCorrente.transferir(BigDecimal.valueOf(100), contaPoupanca);
+							System.out.println(">>> Novo Atual R$ " + contaCorrente.getSaldo());
+							break;
+						case 2:
+							System.out.println("A Transferencia de valores para outro banco é cobrado uma taxa de R$ 10,00");
+							break;
+					}
 					break;
 
 				case 4:
