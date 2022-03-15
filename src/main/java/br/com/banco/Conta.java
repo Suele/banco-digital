@@ -51,13 +51,17 @@ public abstract class Conta {
 		if (valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.add(valor);
 			saldoDepoisDeposito = this.saldo;
-		}
-		if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
-			System.out.println("Deposito realizado com sucesso.");
+
+			if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
+				System.out.println("Deposito realizado com sucesso.");
+				System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
+			} else {
+				System.out.println("Deposito não foi realizado.");
+				System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
+			}
 		} else {
-			System.out.println("Deposito não foi realizado.");
+			System.out.println("Valores negativos ou zerados não são permitidos.");
 		}
-		System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
 	}
 
 	public void transferir(BigDecimal valor, Conta contaTransferir) {
