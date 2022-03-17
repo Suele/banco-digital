@@ -1,6 +1,7 @@
 package br.com.banco;
 
 import java.math.BigDecimal;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClienteBanco {
@@ -31,110 +32,114 @@ public class ClienteBanco {
 
 		int finalizarLoop = -1;
 
-		while (finalizarLoop != 0) {
+		try {
+			while (finalizarLoop != 0) {
 
-			System.out.println("\n");
-			System.out.println("=================================================");
-			System.out.println("================= Menu Principal ===================");
-			System.out.println("============ Selecione uma das opções ==============");
-			System.out.println("1 - Abrir uma conta");
-			System.out.println("2 - Entrar na minha conta");
-			System.out.println("3 - Sair");
+				System.out.println("\n");
+				System.out.println("=================================================");
+				System.out.println("================= Menu Principal ===================");
+				System.out.println("============ Selecione uma das opções ==============");
+				System.out.println("1 - Abrir uma conta");
+				System.out.println("2 - Entrar na minha conta");
+				System.out.println("3 - Sair");
 
-			System.out.println("\n");
-			System.out.print(">>>>> Digite o número da sua opção: ");
-			int opcao = dadosDeEntrada.nextInt();
+				System.out.println("\n");
+				System.out.print(">>>>> Digite o número da sua opção: ");
+				int opcao = dadosDeEntrada.nextInt();
 
-			BigDecimal valor;
+				BigDecimal valor;
 
-			switch (opcao) {
-				case 1:
-					System.out.println("Opção escolhida 1 - Abrir uma conta");
-					break;
-				case 2:
-					System.out.println("============ Você está acessando a sua conta =============");
-					System.out.println("============ Selecione uma das opções ==================");
-					System.out.println("1 - Verificar o Saldo");
-					System.out.println("2 - Fazer Deposito");
-					System.out.println("3 - Fazer Transferencia");
+				switch (opcao) {
+					case 1:
+						System.out.println("Opção escolhida 1 - Abrir uma conta");
+						break;
+					case 2:
+						System.out.println("============ Você está acessando a sua conta =============");
+						System.out.println("============ Selecione uma das opções ==================");
+						System.out.println("1 - Verificar o Saldo");
+						System.out.println("2 - Fazer Deposito");
+						System.out.println("3 - Fazer Transferencia");
 
-					System.out.print(">>>>> Digite o número da sua opção: ");
-					int opcaoDaMinhaConta = dadosDeEntrada.nextInt();
-					System.out.println("\n");
+						System.out.print(">>>>> Digite o número da sua opção: ");
+						int opcaoDaMinhaConta = dadosDeEntrada.nextInt();
+						System.out.println("\n");
 
-					switch (opcaoDaMinhaConta) {
-						case 1:
-							System.out.println(" ========= Opção escolhida 1 - Verificar o Saldo ============");
-							System.out.println(">>> Saldo disponível para Saque R$ " + contaCorrente.getSaldo());
-							break;
-						case 2:
-							System.out.println("\n");
-							System.out.println("=======================================================");
-							System.out.println("======================= Deposito ========================");
-							System.out.println("5 - Depositar na sua conta?");
-							System.out.println("6 - Depositar em outra conta?");
-							System.out.println("7 - Finalizar acesso a conta \n");
+						switch (opcaoDaMinhaConta) {
+							case 1:
+								System.out.println(" ========= Opção escolhida 1 - Verificar o Saldo ============");
+								System.out.println(">>> Saldo disponível para Saque R$ " + contaCorrente.getSaldo());
+								break;
+							case 2:
+								System.out.println("\n");
+								System.out.println("=======================================================");
+								System.out.println("======================= Deposito ========================");
+								System.out.println("5 - Depositar na sua conta?");
+								System.out.println("6 - Depositar em outra conta?");
+								System.out.println("7 - Finalizar acesso a conta \n");
 
-							System.out.print(">>>>> Digite o número da sua opção: ");
-							int opcaoDeposito = dadosDeEntrada.nextInt();
+								System.out.print(">>>>> Digite o número da sua opção: ");
+								int opcaoDeposito = dadosDeEntrada.nextInt();
 
-							switch (opcaoDeposito) {
-								case 5:
-									System.out.println("5 - Depositar na sua conta");
-									System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
-									System.out.print("Valor do Deposito: ");
-									valor = dadosDeEntrada.nextBigDecimal();
-									contaCorrente.depositar(valor);
-									System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
-									break;
-								case 6:
-									System.out.println("6 - Deposito em outra conta");
-									System.out.print(">>> Digite o número da conta: ");
-									int numeroConta = dadosDeEntrada.nextInt();
+								switch (opcaoDeposito) {
+									case 5:
+										System.out.println("5 - Depositar na sua conta");
+										System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
+										System.out.print("Valor do Deposito: ");
+										valor = dadosDeEntrada.nextBigDecimal();
+										contaCorrente.depositar(valor);
+										System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
+										break;
+									case 6:
+										System.out.println("6 - Deposito em outra conta");
+										System.out.print(">>> Digite o número da conta: ");
+										int numeroConta = dadosDeEntrada.nextInt();
 
-									ContaCorrente outraConta = new ContaCorrente(numeroConta, agencia);
-									System.out.print(">>> Digite o valor do Deposito: ");
-									valor = dadosDeEntrada.nextBigDecimal();
-									outraConta.depositar(valor);
-									break;
-								case 7:
-									System.out.println("7 - Finalizar o acesso.");
-									finalizarLoop = 0;
-									System.out.println("Encerrado acesso a sua conta.....");
-									System.exit(0);
-									break;
-							}
-							break;
+										ContaCorrente outraConta = new ContaCorrente(numeroConta, agencia);
+										System.out.print(">>> Digite o valor do Deposito: ");
+										valor = dadosDeEntrada.nextBigDecimal();
+										outraConta.depositar(valor);
+										break;
+									case 7:
+										System.out.println("7 - Finalizar o acesso.");
+										finalizarLoop = 0;
+										System.out.println("Encerrado acesso a sua conta.....");
+										System.exit(0);
+										break;
+								}
+								break;
 
-						case 3:
-							System.out.println("=======================================================");
-							System.out.println("===================== Transferencia ======================");
-							System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
+							case 3:
+								System.out.println("=======================================================");
+								System.out.println("===================== Transferencia ======================");
+								System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 
-							System.out.print(">>> Digite o número da Conta: ");
-							int numeroConta = dadosDeEntrada.nextInt();
+								System.out.print(">>> Digite o número da Conta: ");
+								int numeroConta = dadosDeEntrada.nextInt();
 
-							System.out.print(">>> Digite o valor do Deposito: ");
-							valor = dadosDeEntrada.nextBigDecimal();
+								System.out.print(">>> Digite o valor do Deposito: ");
+								valor = dadosDeEntrada.nextBigDecimal();
 
-							int numeroAgencia = 111;
-							Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
-							Agencia agencia1 = new Agencia(numeroAgencia, banco1);
-							ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia1);
+								int numeroAgencia = 111;
+								Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
+								Agencia agencia1 = new Agencia(numeroAgencia, banco1);
+								ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia1);
 
-							contaCorrente.transferir(valor, contaCorrenteTransferencia);
-							System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
-							break;
-					}
-					break;
+								contaCorrente.transferir(valor, contaCorrenteTransferencia);
+								System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
+								break;
+						}
+						break;
 
-				case 3:
-					System.out.println("Opção escolhida 3 - Sair");
-					finalizarLoop = 0;
-					System.exit(0);
-					break;
+					case 3:
+						System.out.println("Opção escolhida 3 - Sair");
+						finalizarLoop = 0;
+						System.exit(0);
+						break;
+				}
+				dadosDeEntrada.reset();
 			}
-			dadosDeEntrada.reset();
+		} catch (InputMismatchException ex) {
+			System.out.println(">>>> Por Favor Digite um número para . ");
 		}
 	}
 }
