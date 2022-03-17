@@ -8,9 +8,6 @@ public class Banco {
 	private String CNPJ;
 	private List<Agencia> agencias;
 
-	public Banco() {
-	}
-
 	public Banco(String nomeBanco, String CNPJ) {
 		this.nomeBanco = nomeBanco;
 		this.CNPJ = CNPJ;

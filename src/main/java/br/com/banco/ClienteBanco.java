@@ -16,7 +16,7 @@ public class ClienteBanco {
 
 		Banco banco = new Banco("Itaú Unibanco Holding S.A", "60872504000123");
 
-		Agencia agencia = new Agencia(1232L, enderecoAgencia, banco);
+		Agencia agencia = new Agencia(1232, enderecoAgencia, banco);
 
 		banco.adicionaAgencia(agencia);
 
@@ -52,8 +52,8 @@ public class ClienteBanco {
 					System.out.println("Opção escolhida 1 - Abrir uma conta");
 					break;
 				case 2:
-					System.out.println("========== Você está acessando a sua conta ==============");
-					System.out.println("============ Selecione uma das opções ==============");
+					System.out.println("============ Você está acessando a sua conta =============");
+					System.out.println("============ Selecione uma das opções ==================");
 					System.out.println("1 - Verificar o Saldo");
 					System.out.println("2 - Fazer Deposito");
 					System.out.println("3 - Fazer Transferencia");
@@ -107,36 +107,23 @@ public class ClienteBanco {
 							break;
 
 						case 3:
-							System.out.println("\n");
 							System.out.println("=======================================================");
 							System.out.println("===================== Transferencia ======================");
-							System.out.println("1 - Para o mesmo banco.");
-							System.out.println("2 - Para outro banco. \n");
+							System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 
-							System.out.print(">>>>> Digite o número da sua opção: ");
-							int opcaoTransferencia = dadosDeEntrada.nextInt();
+							System.out.print(">>> Digite o número da Conta: ");
+							int numeroConta = dadosDeEntrada.nextInt();
 
-							switch (opcaoTransferencia) {
-								case 1:
-									System.out.println("Opção escolhida 1 - Para o mesmo banco da sua conta.");
-									System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
+							System.out.print(">>> Digite o valor do Deposito: ");
+							valor = dadosDeEntrada.nextBigDecimal();
 
-									System.out.print(">>> Digite o número da Conta: ");
-									int numeroConta = dadosDeEntrada.nextInt();
+							int numeroAgencia = 111;
+							Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
+							Agencia agencia1 = new Agencia(numeroAgencia, banco1);
+							ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia1);
 
-									System.out.print(">>> Digite o valor do Deposito: ");
-									valor = dadosDeEntrada.nextBigDecimal();
-
-									ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia);
-
-									contaCorrente.transferir(valor, contaCorrenteTransferencia);
-									System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
-									break;
-								case 2:
-									System.out.println("Opção escolhida 2 - Para outro banco.");
-									System.out.println("A Transferencia de valores para outro banco é cobrado uma taxa de R$ 10,00");
-									break;
-							}
+							contaCorrente.transferir(valor, contaCorrenteTransferencia);
+							System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
 							break;
 					}
 					break;

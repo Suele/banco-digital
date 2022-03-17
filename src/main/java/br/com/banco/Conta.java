@@ -44,7 +44,7 @@ public abstract class Conta {
 		return valor;
 	}
 
-	public void depositar(BigDecimal valor) {
+	public BigDecimal depositar(BigDecimal valor) {
 		BigDecimal saldoAntesDeposito = this.saldo;
 		BigDecimal saldoDepoisDeposito = new BigDecimal(0);
 
@@ -53,19 +53,29 @@ public abstract class Conta {
 			saldoDepoisDeposito = this.saldo;
 
 			if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
-				System.out.println("Deposito realizado com sucesso.");
-				System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
+				System.out.println(">>> Deposito realizado com sucesso.");
 			} else {
-				System.out.println("Deposito não foi realizado.");
-				System.out.println("saldo antes deposito: " + saldoAntesDeposito + ", saldo depois deposito: " + saldoDepoisDeposito);
+				System.out.println(">>> Deposito não foi realizado.");
 			}
 		} else {
 			System.out.println("Valores negativos ou zerados não são permitidos.");
 		}
+		return saldoDepoisDeposito;
 	}
 
-	public void transferir(BigDecimal valor, Conta contaTransferir) {
-		contaTransferir.depositar(this.sacar(valor));
+	public void transferir(BigDecimal valor, Conta contaTransferencia) {
+		String nomeBancoRecebeTransferencia = contaTransferencia.getAgencia().getBanco().getNomeBanco();
+		String nomeBancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
+
+		if (nomeBancoFazTransferencia.equalsIgnoreCase(nomeBancoRecebeTransferencia)) {
+			System.out.println(">>> Mesmo banco não tem cobrança de taxa extra.");
+			contaTransferencia.depositar(this.sacar(valor));
+		} else {
+			System.out.println(">>> Transferencia para bancos diferentes têm adicional de R$ 10.00");
+			this.saldo = this.saldo.subtract(BigDecimal.valueOf(10.00));
+			BigDecimal valorTransferido = contaTransferencia.depositar(this.sacar(valor));
+			System.out.println(">>> valor transferido: " + valorTransferido);
+		}
 	}
 
 	@Override

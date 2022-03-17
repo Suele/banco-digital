@@ -2,24 +2,26 @@ package br.com.banco;
 
 public class Agencia {
 
-	private Long numeroAgencia;
+	private int numeroAgencia;
 	private Endereco endereco;
 	private Banco banco;
 
-	public Agencia() {
+	public Agencia(int numeroAgencia, Banco banco) {
+		this.numeroAgencia = numeroAgencia;
+		this.banco = banco;
 	}
 
-	public Agencia(Long numeroAgencia, Endereco endereco, Banco banco) {
+	public Agencia(int numeroAgencia, Endereco endereco, Banco banco) {
 		this.numeroAgencia = numeroAgencia;
 		this.endereco = endereco;
 		this.banco = banco;
 	}
 
-	public Long getNumeroAgencia() {
+	public int getNumeroAgencia() {
 		return numeroAgencia;
 	}
 
-	public void setNumeroAgencia(Long numeroAgencia) {
+	public void setNumeroAgencia(int numeroAgencia) {
 		this.numeroAgencia = numeroAgencia;
 	}
 
@@ -29,6 +31,10 @@ public class Agencia {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Banco getBanco() {
+		return banco;
 	}
 
 	@Override
