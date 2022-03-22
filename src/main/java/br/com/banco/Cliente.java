@@ -36,8 +36,8 @@ public class Cliente {
 	public String toString() {
 		return "Cliente{" +
 				"nome='" + nome + '\'' +
-				", CPF='" + CPF + '\'' +
-				", endereço=" + endereco.toString() +
+				", CPF='" + CPF + '\'' + "\n" +
+				", endereço=" + endereco.toString() + "\n" +
 				", conta=" + conta.toString() +
 				'}';
 	}

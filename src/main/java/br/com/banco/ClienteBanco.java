@@ -29,6 +29,7 @@ public class ClienteBanco {
 
 
 		Scanner dadosDeEntrada = new Scanner(System.in);
+		Scanner dadosDeEntradaParaString = new Scanner(System.in);
 
 		int finalizarLoop = -1;
 
@@ -52,6 +53,57 @@ public class ClienteBanco {
 				switch (opcao) {
 					case 1:
 						System.out.println("Opção escolhida 1 - Abrir uma conta");
+						System.out.println("Por Favor Preencha os dados como solicitados");
+						System.out.println("");
+
+						System.out.println("Dados Pessoais do Cliente");
+						System.out.print(">>> Nome Completo: ");
+						String nomeCompleto = dadosDeEntradaParaString.nextLine();
+
+						System.out.print(">>> CPF: ");
+						String cpf = dadosDeEntradaParaString.nextLine();
+
+						System.out.println("");
+
+						System.out.println("Endereço");
+						System.out.print(">>> Rua/Avenida: ");
+						String nome = dadosDeEntradaParaString.nextLine();
+
+						System.out.print(">>> Número: ");
+						int numero = dadosDeEntrada.nextInt();
+
+						System.out.print(">>> Bairro: ");
+						String bairro = dadosDeEntradaParaString.nextLine();
+
+						System.out.print(">>> CEP: ");
+						String CEP = dadosDeEntradaParaString.nextLine();
+
+						System.out.print(">>> Cidade: ");
+						String cidade = dadosDeEntradaParaString.nextLine();
+
+						System.out.print(">>> Estado: ");
+						String estado = dadosDeEntradaParaString.nextLine();
+
+						System.out.println("Qual o tipo do endereço cadastrado?\n" +
+								"\tTRABALHO,\n" +
+								"\tMINHA_CASA,\n" +
+								"\tCASA_SOGRA,\n" +
+								"\tCASA_MAE,\n" +
+								"\tMATRIZ,\n" +
+								"\tAGENCIA");
+						System.out.print(">>> ");
+						String tipo = dadosDeEntradaParaString.nextLine();
+						TipoEndereco tipoEndereco = TipoEndereco.valueOf(tipo.toUpperCase());
+
+						Endereco enderecoNovoCliente = new Endereco(nome, numero, bairro, CEP,
+								cidade, estado, tipoEndereco);
+
+						ContaCorrente novaConta = new ContaCorrente(1111, agencia);
+
+						Cliente novoCliente = new Cliente(nomeCompleto, cpf, enderecoNovoCliente, novaConta);
+
+						System.out.println("Dados do Novo Cadastrado: \n" + novoCliente.toString());
+
 						break;
 					case 2:
 						System.out.println("============ Você está acessando a sua conta =============");
