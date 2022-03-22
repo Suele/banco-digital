@@ -139,7 +139,7 @@ public class ClienteBanco {
 				dadosDeEntrada.reset();
 			}
 		} catch (InputMismatchException ex) {
-			System.out.println(">>>> Por Favor Digite um número para . ");
+			System.out.println(">>>> Por Favor Digite siga as instruções que são solicitadas.");
 		}
 	}
 }
