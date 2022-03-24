@@ -58,12 +58,12 @@ public class ClienteBanco {
 			System.out.println("3 - Sair");
 			System.out.println("\n");
 
+			System.out.print(">>>>> Digite o número da opção escolhida: ");
+			Integer opcao = numerosInteiros(dadoDoTipoString.nextLine());
+
+			BigDecimal valor;
+
 			try {
-
-				System.out.print(">>>>> Digite o número da opção escolhida: ");
-				Integer opcao = numerosInteiros(dadoDoTipoString.nextLine());
-
-				BigDecimal valor;
 
 				switch (opcao) {
 					case 1:
@@ -192,8 +192,10 @@ public class ClienteBanco {
 
 								contaCorrente.transferir(valor, contaCorrenteTransferencia);
 								System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
+
 								break;
 						}
+						break;
 
 					case 3:
 						System.out.println("Opção escolhida 3 - Sair");
