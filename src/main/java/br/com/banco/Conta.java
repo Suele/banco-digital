@@ -54,13 +54,15 @@ public abstract class Conta {
 
 			if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
 				System.out.println(">>> Deposito realizado com sucesso.");
+				return saldoDepoisDeposito;
 			} else {
 				System.out.println(">>> Deposito não foi realizado.");
+				return new BigDecimal(0);
 			}
 		} else {
-			System.out.println("Valores negativos ou zerados não são permitidos.");
+			System.out.println(">>> Valores negativos ou zerados não são permitidos.");
+			return new BigDecimal(0);
 		}
-		return saldoDepoisDeposito;
 	}
 
 	public void transferir(BigDecimal valor, Conta contaTransferencia) {
