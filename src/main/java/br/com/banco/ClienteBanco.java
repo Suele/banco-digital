@@ -1,10 +1,25 @@
 package br.com.banco;
 
 import java.math.BigDecimal;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClienteBanco {
+	public static Boolean eUmNumero(String dadoInseridoPeloUsuario) {
+		return dadoInseridoPeloUsuario.chars().allMatch(Character::isDigit);
+	}
+
+	public static Integer numerosInteiros(String dadoInseridoPeloUsuario) {
+		if (eUmNumero(dadoInseridoPeloUsuario))
+			return new Integer(dadoInseridoPeloUsuario);
+		return null;
+	}
+
+	public static BigDecimal numerosDecimais(String dadoInseridoPeloUsuario) {
+		if (eUmNumero(dadoInseridoPeloUsuario))
+			return new BigDecimal(dadoInseridoPeloUsuario);
+		return null;
+	}
+
 	public static void main(String[] args) {
 
 		Endereco enderecoCliente = new Endereco("Martins Felix Berta", 1050,
@@ -28,25 +43,25 @@ public class ClienteBanco {
 		ContaPoupanca contaPoupanca = new ContaPoupanca(22222, new BigDecimal(10), agencia);
 
 
-		Scanner dadosDeEntrada = new Scanner(System.in);
-		Scanner dadosDeEntradaParaString = new Scanner(System.in);
+		Scanner dadoDoTipoNumerico = new Scanner(System.in);
+		Scanner dadoDoTipoString = new Scanner(System.in);
 
 		int finalizarLoop = -1;
+		while (finalizarLoop != 0) {
 
-		try {
-			while (finalizarLoop != 0) {
+			System.out.println("\n");
+			System.out.println("=======================================================");
+			System.out.println("================= Menu Principal =========================");
+			System.out.println("============ Selecione uma das opções abaixo ==============");
+			System.out.println("1 - Abrir uma conta");
+			System.out.println("2 - Entrar na minha conta");
+			System.out.println("3 - Sair");
+			System.out.println("\n");
 
-				System.out.println("\n");
-				System.out.println("=================================================");
-				System.out.println("================= Menu Principal ===================");
-				System.out.println("============ Selecione uma das opções ==============");
-				System.out.println("1 - Abrir uma conta");
-				System.out.println("2 - Entrar na minha conta");
-				System.out.println("3 - Sair");
+			try {
 
-				System.out.println("\n");
-				System.out.print(">>>>> Digite o número da sua opção: ");
-				int opcao = dadosDeEntrada.nextInt();
+				System.out.print(">>>>> Digite o número da opção escolhida: ");
+				Integer opcao = numerosInteiros(dadoDoTipoString.nextLine());
 
 				BigDecimal valor;
 
@@ -58,31 +73,31 @@ public class ClienteBanco {
 
 						System.out.println("Dados Pessoais do Cliente");
 						System.out.print(">>> Nome Completo: ");
-						String nomeCompleto = dadosDeEntradaParaString.nextLine();
+						String nomeCompleto = dadoDoTipoString.nextLine();
 
 						System.out.print(">>> CPF: ");
-						String cpf = dadosDeEntradaParaString.nextLine();
+						String cpf = dadoDoTipoString.nextLine();
 
 						System.out.println("");
 
 						System.out.println("Endereço");
 						System.out.print(">>> Rua/Avenida: ");
-						String nome = dadosDeEntradaParaString.nextLine();
+						String nome = dadoDoTipoString.nextLine();
 
 						System.out.print(">>> Número: ");
-						int numero = dadosDeEntrada.nextInt();
+						Integer numero = numerosInteiros(dadoDoTipoString.nextLine());
 
 						System.out.print(">>> Bairro: ");
-						String bairro = dadosDeEntradaParaString.nextLine();
+						String bairro = dadoDoTipoString.nextLine();
 
 						System.out.print(">>> CEP: ");
-						String CEP = dadosDeEntradaParaString.nextLine();
+						String CEP = dadoDoTipoString.nextLine();
 
 						System.out.print(">>> Cidade: ");
-						String cidade = dadosDeEntradaParaString.nextLine();
+						String cidade = dadoDoTipoString.nextLine();
 
 						System.out.print(">>> Estado: ");
-						String estado = dadosDeEntradaParaString.nextLine();
+						String estado = dadoDoTipoString.nextLine();
 
 						System.out.println("Qual o tipo do endereço cadastrado?\n" +
 								"\tTRABALHO,\n" +
@@ -92,7 +107,7 @@ public class ClienteBanco {
 								"\tMATRIZ,\n" +
 								"\tAGENCIA");
 						System.out.print(">>> ");
-						String tipo = dadosDeEntradaParaString.nextLine();
+						String tipo = dadoDoTipoString.nextLine();
 						TipoEndereco tipoEndereco = TipoEndereco.valueOf(tipo.toUpperCase());
 
 						Endereco enderecoNovoCliente = new Endereco(nome, numero, bairro, CEP,
@@ -103,8 +118,7 @@ public class ClienteBanco {
 						Cliente novoCliente = new Cliente(nomeCompleto, cpf, enderecoNovoCliente, novaConta);
 
 						System.out.println("Dados do Novo Cadastrado: \n" + novoCliente.toString());
-
-						break;
+						System.out.println("\n");
 					case 2:
 						System.out.println("============ Você está acessando a sua conta =============");
 						System.out.println("============ Selecione uma das opções ==================");
@@ -113,7 +127,7 @@ public class ClienteBanco {
 						System.out.println("3 - Fazer Transferencia");
 
 						System.out.print(">>>>> Digite o número da sua opção: ");
-						int opcaoDaMinhaConta = dadosDeEntrada.nextInt();
+						Integer opcaoDaMinhaConta = numerosInteiros(dadoDoTipoString.nextLine());
 						System.out.println("\n");
 
 						switch (opcaoDaMinhaConta) {
@@ -130,25 +144,25 @@ public class ClienteBanco {
 								System.out.println("7 - Finalizar acesso a conta \n");
 
 								System.out.print(">>>>> Digite o número da sua opção: ");
-								int opcaoDeposito = dadosDeEntrada.nextInt();
+								Integer opcaoDeposito = numerosInteiros(dadoDoTipoString.nextLine());
 
 								switch (opcaoDeposito) {
 									case 5:
 										System.out.println("5 - Depositar na sua conta");
 										System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 										System.out.print("Valor do Deposito: ");
-										valor = dadosDeEntrada.nextBigDecimal();
+										valor = numerosDecimais(dadoDoTipoString.nextLine());
 										contaCorrente.depositar(valor);
 										System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
 										break;
 									case 6:
 										System.out.println("6 - Deposito em outra conta");
 										System.out.print(">>> Digite o número da conta: ");
-										int numeroConta = dadosDeEntrada.nextInt();
+										Integer numeroConta = numerosInteiros(dadoDoTipoString.nextLine());
 
 										ContaCorrente outraConta = new ContaCorrente(numeroConta, agencia);
 										System.out.print(">>> Digite o valor do Deposito: ");
-										valor = dadosDeEntrada.nextBigDecimal();
+										valor = numerosDecimais(dadoDoTipoString.nextLine());
 										outraConta.depositar(valor);
 										break;
 									case 7:
@@ -166,10 +180,10 @@ public class ClienteBanco {
 								System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 
 								System.out.print(">>> Digite o número da Conta: ");
-								int numeroConta = dadosDeEntrada.nextInt();
+								Integer numeroConta = numerosInteiros(dadoDoTipoString.nextLine());
 
 								System.out.print(">>> Digite o valor do Deposito: ");
-								valor = dadosDeEntrada.nextBigDecimal();
+								valor = numerosDecimais(dadoDoTipoString.nextLine());
 
 								int numeroAgencia = 111;
 								Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
@@ -180,18 +194,20 @@ public class ClienteBanco {
 								System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
 								break;
 						}
-						break;
 
 					case 3:
 						System.out.println("Opção escolhida 3 - Sair");
 						finalizarLoop = 0;
 						System.exit(0);
-						break;
+						dadoDoTipoNumerico.close();
+						dadoDoTipoString.close();
 				}
-				dadosDeEntrada.reset();
+
+			} catch (NullPointerException nullPointerException) {
+				System.out.println(">>>> O valor digitado não é valido, por favor siga as instruções solicitadas.");
 			}
-		} catch (InputMismatchException ex) {
-			System.out.println(">>>> Por Favor Digite siga as instruções que são solicitadas.");
+			dadoDoTipoNumerico.reset();
+			dadoDoTipoString.reset();
 		}
 	}
 }
