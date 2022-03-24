@@ -1,9 +1,0 @@
-br/com/banco/ContaCorrente.class
-br/com/banco/Banco.class
-br/com/banco/Conta.class
-br/com/banco/ContaPoupanca.class
-br/com/banco/Endereco.class
-br/com/banco/ClienteBanco.class
-br/com/banco/TipoEndereco.class
-br/com/banco/Cliente.class
-br/com/banco/Agencia.class
