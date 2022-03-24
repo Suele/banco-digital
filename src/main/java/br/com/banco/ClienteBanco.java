@@ -134,9 +134,9 @@ public class ClienteBanco {
 							case 1:
 								System.out.println(" ========= Opção escolhida 1 - Verificar o Saldo ============");
 								System.out.println(">>> Saldo disponível para Saque R$ " + contaCorrente.getSaldo());
+								System.out.println("\n");
 								break;
 							case 2:
-								System.out.println("\n");
 								System.out.println("=======================================================");
 								System.out.println("======================= Deposito ========================");
 								System.out.println("5 - Depositar na sua conta?");
@@ -148,6 +148,7 @@ public class ClienteBanco {
 
 								switch (opcaoDeposito) {
 									case 5:
+										System.out.println("\n");
 										System.out.println("5 - Depositar na sua conta");
 										System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 										System.out.print("Valor do Deposito: ");
@@ -156,6 +157,7 @@ public class ClienteBanco {
 										System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
 										break;
 									case 6:
+										System.out.println("\n");
 										System.out.println("6 - Deposito em outra conta");
 										System.out.print(">>> Digite o número da conta: ");
 										Integer numeroConta = numerosInteiros(dadoDoTipoString.nextLine());
@@ -175,6 +177,7 @@ public class ClienteBanco {
 								break;
 
 							case 3:
+								System.out.println("\n");
 								System.out.println("=======================================================");
 								System.out.println("===================== Transferencia ======================");
 								System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
@@ -206,7 +209,7 @@ public class ClienteBanco {
 				}
 
 			} catch (NullPointerException nullPointerException) {
-				System.out.println(">>>> O valor digitado não é valido, por favor siga as instruções solicitadas.");
+				System.out.println(">>> O valor digitado não é valido, por favor siga as instruções solicitadas.");
 			}
 			dadoDoTipoNumerico.reset();
 			dadoDoTipoString.reset();
