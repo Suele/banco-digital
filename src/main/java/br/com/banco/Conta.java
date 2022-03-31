@@ -1,5 +1,7 @@
 package br.com.banco;
 
+import br.com.banco.exeptions.ValidaContaException;
+
 import java.math.BigDecimal;
 
 public abstract class Conta {
@@ -44,24 +46,27 @@ public abstract class Conta {
 		return valor;
 	}
 
-	public BigDecimal depositar(BigDecimal valor) {
-		BigDecimal saldoAntesDeposito = this.saldo;
-		BigDecimal saldoDepoisDeposito = new BigDecimal(0);
+	public void depositar(BigDecimal valorDeposito) {
+		this.verificaValorDoDepositoOuTransferencia(valorDeposito);
 
-		if (valor.compareTo(BigDecimal.ZERO) > 0) {
-			this.saldo = this.saldo.add(valor);
-			saldoDepoisDeposito = this.saldo;
+		BigDecimal saldoAtual = this.saldo;
+		BigDecimal novoSaldo = this.saldo.add(valorDeposito);
+		this.saldo = novoSaldo;
+		this.verificaDepositoFoiRealizado(saldoAtual, novoSaldo);
+	}
 
-			if (saldoDepoisDeposito.compareTo(saldoAntesDeposito) > 0) {
-				System.out.println(">>> Deposito realizado com sucesso.");
-				return saldoDepoisDeposito;
-			} else {
-				System.out.println(">>> Deposito não foi realizado.");
-				return new BigDecimal(0);
-			}
-		} else {
-			System.out.println(">>> Valores negativos ou zerados não são permitidos.");
-			return new BigDecimal(0);
+	public void verificaDepositoFoiRealizado(BigDecimal saldoAtual, BigDecimal novoSaldo) {
+		if (saldoAtual.compareTo(novoSaldo) > 0) {
+			throw new ValidaContaException("Deposito não foi realizado.");
+		}
+	}
+
+	private void verificaValorDoDepositoOuTransferencia(BigDecimal valor) {
+		if (valor.compareTo(BigDecimal.ZERO) < 0) {
+			throw new ValidaContaException("Valores Negativos não são validos para realização do deposito.");
+		}
+		if (valor.compareTo(BigDecimal.ZERO) == 0) {
+			throw new ValidaContaException("Valores Zerados não são validos para realização do deposito.");
 		}
 	}
 
@@ -75,8 +80,7 @@ public abstract class Conta {
 		} else {
 			System.out.println(">>> Transferencia para bancos diferentes têm adicional de R$ 10.00");
 			this.saldo = this.saldo.subtract(BigDecimal.valueOf(10.00));
-			BigDecimal valorTransferido = contaTransferencia.depositar(this.sacar(valor));
-			System.out.println(">>> valor transferido: " + valorTransferido);
+			contaTransferencia.depositar(this.sacar(valor));
 		}
 	}
 
