@@ -1,10 +1,18 @@
 package br.com.banco;
 
+import br.com.banco.exeptions.ValidaContaException;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ClienteBanco {
 	public static Boolean eUmNumero(String dadoInseridoPeloUsuario) {
+		boolean ehNumeroNegativo = dadoInseridoPeloUsuario.contains("-");
+
+		if (ehNumeroNegativo) {
+			String ehNumeroPositivo = dadoInseridoPeloUsuario.replaceFirst("-", "");
+			return ehNumeroPositivo.chars().allMatch(Character::isDigit);
+		}
 		return dadoInseridoPeloUsuario.chars().allMatch(Character::isDigit);
 	}
 
@@ -64,7 +72,6 @@ public class ClienteBanco {
 			BigDecimal valor;
 
 			try {
-
 				switch (opcao) {
 					case 1:
 						System.out.println("Opção escolhida 1 - Abrir uma conta");
@@ -152,9 +159,14 @@ public class ClienteBanco {
 										System.out.println("5 - Depositar na sua conta");
 										System.out.println(">>> Seu Saldo Atual R$ " + contaCorrente.getSaldo());
 										System.out.print("Valor do Deposito: ");
-										valor = numerosDecimais(dadoDoTipoString.nextLine());
-										contaCorrente.depositar(valor);
-										System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
+
+										try {
+											valor = numerosDecimais(dadoDoTipoString.nextLine());
+											contaCorrente.depositar(valor);
+											System.out.println(">>> Seu Novo Saldo R$ " + contaCorrente.getSaldo());
+										} catch (ValidaContaException e) {
+											System.out.println(e.getMessage());
+										}
 										break;
 									case 6:
 										System.out.println("\n");
@@ -165,7 +177,11 @@ public class ClienteBanco {
 										ContaCorrente outraConta = new ContaCorrente(numeroConta, agencia);
 										System.out.print(">>> Digite o valor do Deposito: ");
 										valor = numerosDecimais(dadoDoTipoString.nextLine());
-										outraConta.depositar(valor);
+										try {
+											outraConta.depositar(valor);
+										} catch (ValidaContaException e) {
+											e.getMessage();
+										}
 										break;
 									case 7:
 										System.out.println("7 - Finalizar o acesso.");
@@ -195,17 +211,15 @@ public class ClienteBanco {
 
 								contaCorrente.transferir(valor, contaCorrenteTransferencia);
 								System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
-
 								break;
 						}
 						break;
-
 					case 3:
 						System.out.println("Opção escolhida 3 - Sair");
 						finalizarLoop = 0;
-						System.exit(0);
 						dadoDoTipoNumerico.close();
 						dadoDoTipoString.close();
+						System.exit(0);
 				}
 
 			} catch (NullPointerException nullPointerException) {
