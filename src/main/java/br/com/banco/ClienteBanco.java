@@ -205,6 +205,8 @@ public class ClienteBanco {
 								valor = numerosDecimais(dadoDoTipoString.nextLine());
 
 								int numeroAgencia = 111;
+								// bancos iguais
+								//Banco banco1 = new Banco("Itaú Unibanco Holding S.A", "60872504000123");
 								Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
 								Agencia agencia1 = new Agencia(numeroAgencia, banco1);
 								ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia1);

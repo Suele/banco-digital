@@ -11,8 +11,7 @@ public abstract class Conta {
 	private Agencia agencia;
 
 	public Conta(int numeroConta, BigDecimal saldo, Agencia agencia) {
-		if (numeroConta > 0 && saldo.compareTo(BigDecimal.ZERO) > 0 &&
-				agencia != null) {
+		if (numeroConta > 0 && saldo.compareTo(BigDecimal.ZERO) > 0 && agencia != null) {
 			this.numeroConta = numeroConta;
 			this.saldo = saldo;
 			this.agencia = agencia;
@@ -39,8 +38,7 @@ public abstract class Conta {
 
 	public BigDecimal sacar(BigDecimal valor) {
 
-		if (this.saldo.compareTo(BigDecimal.ZERO) > 0 &&
-				valor.compareTo(BigDecimal.ZERO) > 0) {
+		if (this.saldo.compareTo(BigDecimal.ZERO) > 0 && valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.subtract(valor);
 		}
 		return valor;
@@ -70,17 +68,15 @@ public abstract class Conta {
 		}
 	}
 
-	public void transferir(BigDecimal valor, Conta contaTransferencia) {
-		String nomeBancoRecebeTransferencia = contaTransferencia.getAgencia().getBanco().getNomeBanco();
+	public void transferir(BigDecimal valorTransferido, Conta contaTransferidoValor) {
+		String nomeBancoRecebeTransferencia = contaTransferidoValor.getAgencia().getBanco().getNomeBanco();
 		String nomeBancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
 
 		if (nomeBancoFazTransferencia.equalsIgnoreCase(nomeBancoRecebeTransferencia)) {
-			System.out.println(">>> Mesmo banco não tem cobrança de taxa extra.");
-			contaTransferencia.depositar(this.sacar(valor));
+			contaTransferidoValor.depositar(this.sacar(valorTransferido));
 		} else {
-			System.out.println(">>> Transferencia para bancos diferentes têm adicional de R$ 10.00");
-			this.saldo = this.saldo.subtract(BigDecimal.valueOf(10.00));
-			contaTransferencia.depositar(this.sacar(valor));
+			this.saldo = this.saldo.subtract(BigDecimal.valueOf(20.00));
+			contaTransferidoValor.depositar(this.sacar(valorTransferido));
 		}
 	}
 
