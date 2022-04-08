@@ -117,8 +117,7 @@ public class ClienteBanco {
 						String tipo = dadoDoTipoString.nextLine();
 						TipoEndereco tipoEndereco = TipoEndereco.valueOf(tipo.toUpperCase());
 
-						Endereco enderecoNovoCliente = new Endereco(nome, numero, bairro, CEP,
-								cidade, estado, tipoEndereco);
+						Endereco enderecoNovoCliente = new Endereco(nome, numero, bairro, CEP, cidade, estado, tipoEndereco);
 
 						ContaCorrente novaConta = new ContaCorrente(1111, agencia);
 
@@ -180,7 +179,7 @@ public class ClienteBanco {
 										try {
 											outraConta.depositar(valor);
 										} catch (ValidaContaException e) {
-											e.getMessage();
+											System.out.println(e.getMessage());
 										}
 										break;
 									case 7:
@@ -204,15 +203,18 @@ public class ClienteBanco {
 								System.out.print(">>> Digite o valor do Deposito: ");
 								valor = numerosDecimais(dadoDoTipoString.nextLine());
 
-								int numeroAgencia = 111;
 								// bancos iguais
 								//Banco banco1 = new Banco("Itaú Unibanco Holding S.A", "60872504000123");
 								Banco banco1 = new Banco("Banco do Brasil", "00000000000191");
-								Agencia agencia1 = new Agencia(numeroAgencia, banco1);
+								Agencia agencia1 = new Agencia(111, banco1);
 								ContaCorrente contaCorrenteTransferencia = new ContaCorrente(numeroConta, agencia1);
 
-								contaCorrente.transferir(valor, contaCorrenteTransferencia);
-								System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
+								try {
+									contaCorrente.transferir(valor, contaCorrenteTransferencia);
+									System.out.println(">>> Seu saldo apos a transferencia R$ " + contaCorrente.getSaldo());
+								} catch (ValidaContaException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 						}
 						break;

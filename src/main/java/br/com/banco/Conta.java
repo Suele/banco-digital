@@ -46,17 +46,7 @@ public abstract class Conta {
 
 	public void depositar(BigDecimal valorDeposito) {
 		this.verificaValorDoDepositoOuTransferencia(valorDeposito);
-
-		BigDecimal saldoAtual = this.saldo;
-		BigDecimal novoSaldo = this.saldo.add(valorDeposito);
-		this.saldo = novoSaldo;
-		this.verificaDepositoFoiRealizado(saldoAtual, novoSaldo);
-	}
-
-	public void verificaDepositoFoiRealizado(BigDecimal saldoAtual, BigDecimal novoSaldo) {
-		if (saldoAtual.compareTo(novoSaldo) > 0) {
-			throw new ValidaContaException("Deposito não foi realizado.");
-		}
+		this.saldo.add(valorDeposito);
 	}
 
 	private void verificaValorDoDepositoOuTransferencia(BigDecimal valor) {
@@ -69,6 +59,7 @@ public abstract class Conta {
 	}
 
 	public void transferir(BigDecimal valorTransferido, Conta contaTransferidoValor) {
+		this.verificaValorDoDepositoOuTransferencia(valorTransferido);
 		String nomeBancoRecebeTransferencia = contaTransferidoValor.getAgencia().getBanco().getNomeBanco();
 		String nomeBancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
 
