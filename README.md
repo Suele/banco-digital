@@ -5,7 +5,7 @@ mais conhecidos como ATM.
 ## Funcionalidades do Banco Digital
 - [X] Verificar o saldo.
 - [X] Fazer depósito na sua conta.
-- [X] Realizar transferência de valores para outra conta.
+- [X] Realizar transferência de valores para outras contas.
 - [ ] Adicionar no menu **cadastro de novos clientes** o tipo de conta 
 que o cliente quer abrir, corrente ou poupança.
 
@@ -19,8 +19,8 @@ que o cliente quer abrir, corrente ou poupança.
 - A conta que será transferido o valor **existe** ou **não**.
 - O valor retirado da **Conta A** foi depositado na **Conta B**.
 - **Conta A** e **Conta B** são contas de bancos diferentes,
-então têm uma taxa de R$ 10,00 que será cobrada de quem transfere.
-- Não cobrar a taxa de R$ 10,00 para contas do mesmo banco.
+então têm uma taxa de R$ 20,00 que será cobrada de quem transfere.
+- Não cobrar a taxa de R$ 20,00 para contas do mesmo banco.
 
 ## Testes Unitarios
 Para realizar os testes unitários será adicionado no arquivo pom.xml como dependência o JUnit 5.
