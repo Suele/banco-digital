@@ -34,11 +34,12 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente{" +
-				"nome='" + nome + '\'' +
-				", CPF='" + CPF + '\'' + "\n" +
-				", endereço=" + endereco.toString() + "\n" +
-				", conta=" + conta.toString() +
+		String tipoDaConta = conta.getClass().toString().substring(19);
+		return " \nCliente{" +
+				"nome: '" + nome + '\'' +
+				", CPF: " + CPF + '\'' +
+				endereco.toString() + '\'' +
+				tipoDaConta + conta.toString() + '\'' +
 				'}';
 	}
 }

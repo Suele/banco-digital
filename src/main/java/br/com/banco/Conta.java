@@ -73,10 +73,10 @@ public abstract class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta{" +
-				"saldo=" + saldo +
-				", numero conta=" + numeroConta +
-				", agencia=" + agencia.toString() +
+		return "\nConta{" +
+				"saldo: " + saldo +
+				", numeroConta: " + numeroConta +
+				agencia.toString() +
 				'}';
 	}
 }

@@ -58,9 +58,10 @@ public class ClienteBanco {
 		while (finalizarLoop != 0) {
 
 			System.out.println("\n");
-			System.out.println("=======================================================");
+			System.out.println("==========================================================");
 			System.out.println("================= Menu Principal =========================");
-			System.out.println("============ Selecione uma das opções abaixo ==============");
+			System.out.println("============ Selecione uma das opções abaixo =============");
+			System.out.println("==========================================================");
 			System.out.println("1 - Abrir uma conta");
 			System.out.println("2 - Entrar na minha conta");
 			System.out.println("3 - Sair");
@@ -74,7 +75,10 @@ public class ClienteBanco {
 			try {
 				switch (opcao) {
 					case 1:
-						System.out.println("Opção escolhida 1 - Abrir uma conta");
+						System.out.println("\n");
+						System.out.println("===============================================================");
+						System.out.println("============ Opção escolhida 1 - Abrir uma conta ==============");
+						System.out.println("===============================================================");
 						System.out.println("Por Favor Preencha os dados como solicitados");
 						System.out.println("");
 
@@ -117,20 +121,53 @@ public class ClienteBanco {
 						String tipo = dadoDoTipoString.nextLine();
 						TipoEndereco tipoEndereco = TipoEndereco.valueOf(tipo.toUpperCase());
 
+						System.out.println("\n");
+						System.out.println("======================================================================");
+						System.out.println("============ Qual o tipo de Conta que você deseja abrir? ==============");
+						System.out.println("============== Escolha uma das opções abaixo ==========================");
+						System.out.println("================== 1 - Conta Corrente ==================================");
+						System.out.println("================== 2 - Conta Poupança ==================================");
+						System.out.println("=======================================================================");
+						System.out.println("\n");
+
 						Endereco enderecoNovoCliente = new Endereco(nome, numero, bairro, CEP, cidade, estado, tipoEndereco);
+						Conta novaConta = null;
 
-						ContaCorrente novaConta = new ContaCorrente(1111, agencia);
+						Integer opcaoTipoConta = numerosInteiros(dadoDoTipoString.nextLine());
+						System.out.println(">>> Digite aqui a sua opção: ");
+						System.out.println("\n");
 
+						switch (opcaoTipoConta) {
+							case 1:
+								System.out.println("===============================================================");
+								System.out.println("============ Opção escolhida 1 - Conta Corrente =====================");
+								System.out.println("===============================================================");
+								novaConta = new ContaCorrente(1111, agencia);
+								System.out.println(novaConta.getClass().toString().substring(19));
+
+								break;
+							case 2:
+								System.out.println("===============================================================");
+								System.out.println("=========== Opção escolhida 2 - Conta Poupança =====================");
+								System.out.println("===============================================================");
+								novaConta = new ContaPoupanca(1111, new BigDecimal(1000d), agencia);
+								break;
+						}
 						Cliente novoCliente = new Cliente(nomeCompleto, cpf, enderecoNovoCliente, novaConta);
 
-						System.out.println("Dados do Novo Cadastrado: \n" + novoCliente.toString());
 						System.out.println("\n");
+						System.out.println(">>> Novo Cliente Cadastrado: " + novoCliente.toString());
+						System.out.println("\n");
+						break;
 					case 2:
-						System.out.println("============ Você está acessando a sua conta =============");
-						System.out.println("============ Selecione uma das opções ==================");
+						System.out.println("===============================================================");
+						System.out.println("================ Você está acessando a sua conta ===================");
+						System.out.println("=================== Selecione uma das opções =====================");
+						System.out.println("===============================================================");
 						System.out.println("1 - Verificar o Saldo");
 						System.out.println("2 - Fazer Deposito");
 						System.out.println("3 - Fazer Transferencia");
+						System.out.println("===============================================================");
 
 						System.out.print(">>>>> Digite o número da sua opção: ");
 						Integer opcaoDaMinhaConta = numerosInteiros(dadoDoTipoString.nextLine());

@@ -39,10 +39,10 @@ public class Agencia {
 
 	@Override
 	public String toString() {
-		return "Agencia{" +
+		return "\nAgencia{" +
 				"numero agencia=" + numeroAgencia +
 				", endereço=" + endereco +
-				", banco=" + banco.toString() +
+				banco.toString() +
 				'}';
 	}
 }
