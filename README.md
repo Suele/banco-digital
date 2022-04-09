@@ -6,8 +6,7 @@ mais conhecidos como ATM.
 - [X] Verificar o saldo.
 - [X] Fazer depósito na sua conta.
 - [X] Realizar transferência de valores para outras contas.
-- [ ] Adicionar no menu **cadastro de novos clientes** o tipo de conta 
-que o cliente quer abrir, corrente ou poupança.
+- [X] Cliente pode abrir conta **poupança** ou **corrente**. 
 
 ## Cenários de Testes
 
