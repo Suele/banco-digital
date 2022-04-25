@@ -80,7 +80,7 @@ public class ClienteBanco {
 						System.out.println("============ Opção escolhida 1 - Abrir uma conta ==============");
 						System.out.println("===============================================================");
 						System.out.println("Por Favor Preencha os dados como solicitados");
-						System.out.println("");
+						System.out.println();
 
 						System.out.println("Dados Pessoais do Cliente");
 						System.out.print(">>> Nome Completo: ");
@@ -89,7 +89,7 @@ public class ClienteBanco {
 						System.out.print(">>> CPF: ");
 						String cpf = dadoDoTipoString.nextLine();
 
-						System.out.println("");
+						System.out.println();
 
 						System.out.println("Endereço");
 						System.out.print(">>> Rua/Avenida: ");
@@ -156,7 +156,7 @@ public class ClienteBanco {
 						Cliente novoCliente = new Cliente(nomeCompleto, cpf, enderecoNovoCliente, novaConta);
 
 						System.out.println("\n");
-						System.out.println(">>> Novo Cliente Cadastrado: " + novoCliente.toString());
+						System.out.println(">>> Novo Cliente Cadastrado: " + novoCliente);
 						System.out.println("\n");
 						break;
 					case 2:

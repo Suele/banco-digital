@@ -29,7 +29,7 @@ public abstract class Conta {
 	}
 
 	public BigDecimal getSaldo() {
-		return saldo;
+		return this.saldo;
 	}
 
 	public Agencia getAgencia() {
@@ -46,7 +46,7 @@ public abstract class Conta {
 
 	public void depositar(BigDecimal valorDeposito) {
 		this.verificaValorDoDepositoOuTransferencia(valorDeposito);
-		this.saldo.add(valorDeposito);
+		this.saldo = this.saldo.add(valorDeposito);
 	}
 
 	private void verificaValorDoDepositoOuTransferencia(BigDecimal valor) {
