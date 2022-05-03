@@ -53,6 +53,19 @@ public class ContaTest {
 				new Agencia(123,
 						new Banco("Banco do Brasil", "00000000000")));
 
-		Assertions.assertEquals(new BigDecimal(0), conta1.qualEhBanco(conta2));
+		Assertions.assertEquals(BigDecimal.valueOf(0), conta1.qualEhBanco(conta2));
+	}
+
+	@Test
+	void transferir_valor_para_contas_de_bancos_difentes() {
+		Conta conta1 = new ContaCorrente(111, new BigDecimal(1000),
+				new Agencia(123,
+						new Banco("Banco do Brasil", "00000000000")));
+
+		Conta conta2 = new ContaCorrente(222, new BigDecimal(2000),
+				new Agencia(123,
+						new Banco("Banco Itaú", "00000000000")));
+
+		Assertions.assertEquals(BigDecimal.valueOf(20.00), conta1.qualEhBanco(conta2));
 	}
 }
