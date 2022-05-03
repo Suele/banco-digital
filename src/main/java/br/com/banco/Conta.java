@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 public abstract class Conta {
 
+	private final BigDecimal TAXA_TRANSFERENCIA = BigDecimal.valueOf(20.00);
 	private BigDecimal saldo;
 	private int numeroConta;
 	private Agencia agencia;
@@ -21,7 +22,7 @@ public abstract class Conta {
 	public Conta(int numeroConta, Agencia agencia) {
 		this.numeroConta = numeroConta;
 		this.agencia = agencia;
-		this.saldo = new BigDecimal(100);
+		this.saldo = BigDecimal.valueOf(100);
 	}
 
 	public int getNumeroConta() {
@@ -71,10 +72,10 @@ public abstract class Conta {
 		String bancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
 
 		if (bancoFazTransferencia.equalsIgnoreCase(bancoRecebeTransferencia)) {
-			return new BigDecimal(0);
+			return BigDecimal.valueOf(0);
 		} else {
-			this.saldo = this.saldo.subtract(BigDecimal.valueOf(20.00));
-			return this.saldo;
+			this.saldo = this.saldo.subtract(TAXA_TRANSFERENCIA);
+			return TAXA_TRANSFERENCIA;
 		}
 	}
 
