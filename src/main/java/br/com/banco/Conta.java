@@ -40,8 +40,9 @@ public abstract class Conta {
 
 		if (this.saldo.compareTo(BigDecimal.ZERO) > 0 && valor.compareTo(BigDecimal.ZERO) > 0) {
 			this.saldo = this.saldo.subtract(valor);
+			return this.saldo;
 		}
-		return valor;
+		throw new ValidaContaException("Saldo Insuficiente para realização do saque.");
 	}
 
 	public void depositar(BigDecimal valorDeposito) {
@@ -58,16 +59,22 @@ public abstract class Conta {
 		}
 	}
 
-	public void transferir(BigDecimal valorTransferido, Conta contaTransferidoValor) {
+	public void transferir(BigDecimal valorTransferido, Conta recebeValorTransferido) {
 		this.verificaValorDoDepositoOuTransferencia(valorTransferido);
-		String nomeBancoRecebeTransferencia = contaTransferidoValor.getAgencia().getBanco().getNomeBanco();
-		String nomeBancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
 
-		if (nomeBancoFazTransferencia.equalsIgnoreCase(nomeBancoRecebeTransferencia)) {
-			contaTransferidoValor.depositar(this.sacar(valorTransferido));
+		this.qualEhBanco(recebeValorTransferido);
+		recebeValorTransferido.depositar(this.sacar(valorTransferido));
+	}
+
+	public BigDecimal qualEhBanco(Conta contaRecebeValorTransferido) {
+		String bancoRecebeTransferencia = contaRecebeValorTransferido.getAgencia().getBanco().getNomeBanco();
+		String bancoFazTransferencia = this.getAgencia().getBanco().getNomeBanco();
+
+		if (bancoFazTransferencia.equalsIgnoreCase(bancoRecebeTransferencia)) {
+			return new BigDecimal(0);
 		} else {
 			this.saldo = this.saldo.subtract(BigDecimal.valueOf(20.00));
-			contaTransferidoValor.depositar(this.sacar(valorTransferido));
+			return this.saldo;
 		}
 	}
 
