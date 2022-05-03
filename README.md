@@ -31,6 +31,8 @@ Para realizar os testes unitários será adicionado no arquivo pom.xml como depe
 - [X] Depósito valor negativo na conta.
 
 #### Transferência
+- [X] Cobrança da taxa de transferência para bancos diferentes.
+- [X] Não cobrar taxa de transferência para contas do mesmo banco.
 - [ ] Transferência realizada com sucesso.
 - [ ] Transferência para uma conta que não exista.
 - [ ] Saldo insuficiente para realizar a transferência.
