@@ -4,5 +4,6 @@
 /misc.xml
 /jarRepositories.xml
 /compiler.xml
-.idea
+../.idea/
+.idea/
 target/
